@@ -41,7 +41,7 @@ def generate_short_url():
 def encode():
     passed_url = request.args.get('url', None)
     if (passed_url is None):
-       return jsonify({"error": "Missing url parameter"})
+       return jsonify({"error": "Missing url parameter"}), 400
     # Check for existing, and return existing if found. Otherwise create and save new.
     existing_match = next((item["short"] for item in memory_store if item["long"] == passed_url), None)
     if (existing_match):
@@ -59,14 +59,15 @@ def encode():
 def decode():
     passed_url = request.args.get('url', None)
     if (passed_url is None):
-       return jsonify({"error": "Missing url parameter"})
+       return jsonify({"error": "Missing url parameter"}), 400
     # Check for existing, and return existing if found. Otherwise error out.
     existing_match = next((item["long"] for item in memory_store if item["short"] == passed_url), None)
     if (existing_match):
         return jsonify({"long": existing_match})
     else:
-        return jsonify({"error": "Could not find shortened url"})
+        return jsonify({"error": "Could not find shortened url"}), 404
 
 # Run the Waitress server
-from waitress import serve
-serve(app, listen='*:5000')
+if __name__ == "__main__":
+    from waitress import serve
+    serve(app, listen='*:5000')
