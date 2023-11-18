@@ -1,9 +1,12 @@
-name: Pytest
+name: Pylint and Pytest
 on: [push]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        execute-command: ['pylint *.py', 'pytest']
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -13,8 +16,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Install pytest and run tests
-        run: |
-          pip install pytest
-          pytest
+          pip install -r requirements.dev
+      - name: Run the test
+        run: ${{ matrix.execute-command }}

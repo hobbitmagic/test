@@ -16,13 +16,15 @@ I would test the limiter a bit more to make sure it is working as desired.
 - Pip (used 23.3.1)
 
 ## Usage
-1. Install dependencies: `pip install -r requirements.txt`
+1. Install dependencies: `pip install -r requirements.prod`
+    - (or `pip install -r requirements.dev` for dev environment)
 1. Then run the app `flask --app main run`
 1. Query the api with `url` parameter to encode or decode:
     - http://127.0.0.1:5000/encode?url=http://example.com/dir1/dir2
     - http://127.0.0.1:5000/decode?url=http://example.org/AbCd7E
 
 ## Tests
-1. Install pytest `pip install -U pytest`
+1. Install dependencies: `pip install -r requirements.dev`
 1. Run all tests with `pytest`
+1. Run pylint with `pylint *.py`
 1. Tests should also run on Github Actions automatically on every push to main branch
