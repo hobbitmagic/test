@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-
 # Options
 SHORT_URL_LENGTH = 6
 SHORT_URL_DOMAIN = "http://example.org/"
@@ -69,8 +68,3 @@ def decode():
     if existing_match:
         return jsonify({"long": existing_match})
     return jsonify({"error": "Could not find shortened url"}), 404
-
-# Run the Waitress server
-if __name__ == "__main__":
-    from waitress import serve
-    serve(app, listen='*:5000')

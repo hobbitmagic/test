@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        execute-command: ['pylint *.py', 'pytest']
+        execute-command: ['make lint', 'make test']
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -16,6 +16,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.dev
+          make install-dev
       - name: Run the test
         run: ${{ matrix.execute-command }}
