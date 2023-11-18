@@ -1,4 +1,6 @@
 # URL Shortener
+![Pylint](https://github.com/hobbitmagic/test/actions/workflows/pylint.yml/badge.svg) ![Pytest](https://github.com/hobbitmagic/test/actions/workflows/pytest.yml/badge.svg)
+
 A simple url shortener. API consisting of two GET endpoints: /encode and /decode.
 Input: takes required "url" string parameter for each endpoint.
 Output: JSON object with "short" or "long" properties.
